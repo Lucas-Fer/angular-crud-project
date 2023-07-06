@@ -10,7 +10,7 @@ import { getUsers, saveUsers, usersMock } from 'src/app/utils/user-controller';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public userDataMock: any;
+  public userDataInfo: any;
 
   constructor(private modalService: NgbModal) { }
 
@@ -21,17 +21,24 @@ export class HomeComponent implements OnInit {
   getUserInfo() {
     const users = getUsers()
 
-    users ? this.userDataMock = JSON.parse(users) : this.userDataMock = usersMock;
+    users ? this.userDataInfo = JSON.parse(users) : this.userDataInfo = usersMock;
   }
 
   openAddUserModal() {
     const modalRef = this.modalService.open(RegisterNewUserFormComponent);
-    modalRef.componentInstance.currencyUsers = this.userDataMock;
+    modalRef.componentInstance.currencyUsers = this.userDataInfo;
 
     modalRef.componentInstance.newUserValidated.subscribe((newUser: UserData) => {
-      this.userDataMock.push(newUser);
+      this.userDataInfo.push(newUser);
 
-      saveUsers(this.userDataMock)
+      saveUsers(this.userDataInfo)
     });
+  }
+
+  deleteUser(userId: number) {
+    const userDataWithoutCurrency = this.userDataInfo.filter((user: UserData) => user.id !== userId)
+    this.userDataInfo = userDataWithoutCurrency;
+
+    saveUsers(userDataWithoutCurrency)
   }
 }
