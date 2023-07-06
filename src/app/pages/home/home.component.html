@@ -15,11 +15,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td scope="row">Mark</td>
-            <td scope="row">Otto</td>
-            <td scope="row">@mdo</td>
+          <tr *ngFor="let user of userData">
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.email}}</td>
+            <td>{{user.username}}</td>
+            <td>@mdo</td>
           </tr>
         </tbody>
       </table>
