@@ -1,15 +1,29 @@
 <div class="modal-header">
   <h4 class="modal-title">Add User</h4>
-  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form>
-    <!-- Campos do formulário -->
+  <form (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="newUser.username" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="newUser.email" required>
+    </div>
+    <div class="form-group">
+      <label for="cpf">CPF</label>
+      <input type="text" class="form-control" id="cpf" name="cpf" [(ngModel)]="newUser.cpf" required>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
   </form>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel')">Cancel</button>
-  <button type="button" class="btn btn-primary">Save</button>
 </div>
