@@ -1,4 +1,16 @@
-const usersDataMock = [
+import { UserData } from "../pages/home/interfaces/userData";
+
+export const saveUsers = (userData: UserData[]) => {
+  localStorage.setItem('users', JSON.stringify(userData));
+}
+
+export const getUsers = () => {
+  const userData = localStorage.getItem('users');
+
+  return userData;
+}
+
+export const usersMock = [
   {
     id: 1,
     email: "alisha@gmail.com",
@@ -28,5 +40,3 @@ const usersDataMock = [
     cpf: 12313656909
   }
 ]
-
-export default usersDataMock
