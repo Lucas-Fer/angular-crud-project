@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserData } from './interfaces/userData';
 import usersDataMock from '../../../mock/user.mock'
+import { RegisterNewUserFormComponent } from 'src/app/components/register-new-user-form/register-new-user-form.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,9 +17,14 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.userData = usersDataMock;
+  }
+
+  openAddUserModal() {
+    const modalRef = this.modalService.open(RegisterNewUserFormComponent);
+    modalRef.componentInstance.name = 'Add User Form';
   }
 }
