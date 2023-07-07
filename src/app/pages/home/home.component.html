@@ -65,8 +65,8 @@
             <td>{{user.username}}</td>
             <td style="gap: 1rem;">
               <div style="display: flex; gap: 1rem;">
-                <i class="bi bi-eye-fill text-primary" (click)="openViewUserModal(user)"></i>
-                <i class="bi bi-pencil-square text-warning"></i>
+                <i class="bi bi-eye-fill text-primary" (click)="openUserFormModal(user, 'preview')"></i>
+                <i class="bi bi-pencil-square text-warning" (click)="openUserFormModal(user, 'edit')"></i>
                 <i class="bi bi-trash-fill text-danger" (click)="deleteUser(user.id)"></i>
               </div>
             </td>

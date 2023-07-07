@@ -16,16 +16,25 @@ export class RegisterNewUserFormComponent {
 
   @Input() currencyUsers: UserData[] = [this.newUser];
   @Input() userDataPreview: UserData = this.newUser;
+
   @Input() onlyPreview: boolean = false;
+  @Input() editUser: boolean = false;
 
   @Output() newUserValidated: EventEmitter<UserData> = new EventEmitter<UserData>();
 
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
+    this.validateFormAction()
+  }
+
+  validateFormAction() {
     if (this.onlyPreview) {
       this.newUser = this.userDataPreview;
-      this.onlyPreview = true;
+    }
+    if (this.editUser) {
+      this.newUser = this.userDataPreview;
+
     }
   }
 
