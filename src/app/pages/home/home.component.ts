@@ -10,7 +10,12 @@ import { getUsers, saveUsers, usersMock } from 'src/app/utils/user-controller';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public userDataInfo: any;
+  public selectedLimit: number = 5;
+  public userDataInfo: UserData[] = [{
+    id: 0,
+    email: "",
+    username: "",
+  }];
 
   constructor(private modalService: NgbModal) { }
 

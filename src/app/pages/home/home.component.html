@@ -17,7 +17,7 @@
             <div class="col-3">
               <div class="d-flex align-items-center">
                 <span>Show</span>
-                <select class="form-select mx-2">
+                <select class="form-select mx-2" [(ngModel)]="selectedLimit">
                   <option value="5">5</option>
                   <option value="10">10</option>
                   <option value="15">15</option>
@@ -46,7 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of userDataInfo">
+          <tr *ngFor="let user of userDataInfo | slice:0:selectedLimit">
             <th scope="row">{{user.id}}</th>
             <td>{{user.email}}</td>
             <td>{{user.username}}</td>
