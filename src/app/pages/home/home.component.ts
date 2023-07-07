@@ -52,6 +52,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  openViewUserModal(userData: UserData) {
+    const modalRef = this.modalService.open(RegisterNewUserFormComponent);
+
+    modalRef.componentInstance.userDataPreview = userData;
+    modalRef.componentInstance.onlyPreview = true;
+  }
+
   deleteUser(userId: number) {
     const userDataWithoutCurrency = this.userDataInfo.filter((user: UserData) => user.id !== userId)
     this.userDataInfo = userDataWithoutCurrency;

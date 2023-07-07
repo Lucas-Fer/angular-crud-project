@@ -15,10 +15,19 @@ export class RegisterNewUserFormComponent {
   };
 
   @Input() currencyUsers: UserData[] = [this.newUser];
+  @Input() userDataPreview: UserData = this.newUser;
+  @Input() onlyPreview: boolean = false;
 
   @Output() newUserValidated: EventEmitter<UserData> = new EventEmitter<UserData>();
 
   constructor(public activeModal: NgbActiveModal) { }
+
+  ngOnInit() {
+    if (this.onlyPreview) {
+      this.newUser = this.userDataPreview;
+      this.onlyPreview = true;
+    }
+  }
 
   submitForm() {
     const maxId = Math.max(...this.currencyUsers.map(user => user.id));
