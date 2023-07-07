@@ -40,9 +40,21 @@
       <table class="table table-striped table-bordered table-hover mt-4">
         <thead class="thead-light">
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Email</th>
-            <th scope="col">Username</th>
+            <th scope="col" class="sortable" id="header-id" (click)="sortUserData('id')">ID
+              <span *ngIf="sortColumn === 'id'">
+                <i [ngClass]="sortOrder === 'asc' ? 'fa fa-sort-asc' : 'fa fa-sort-desc'"></i>
+              </span>
+            </th>
+            <th scope="col" class="sortable" id="header-email" (click)="sortUserData('email')">Email
+              <span *ngIf="sortColumn === 'email'">
+                <i [ngClass]="sortOrder === 'asc' ? 'fa fa-sort-asc' : 'fa fa-sort-desc'"></i>
+              </span>
+            </th>
+            <th scope="col" class="sortable" id="header-username" (click)="sortUserData('username')">Username
+              <span *ngIf="sortColumn === 'username'">
+                <i [ngClass]="sortOrder === 'asc' ? 'fa fa-sort-asc' : 'fa fa-sort-desc'"></i>
+              </span>
+            </th>
             <th scope="col">Actions</th>
           </tr>
         </thead>

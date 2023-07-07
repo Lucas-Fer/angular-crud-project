@@ -12,6 +12,10 @@ import { getUsers, saveUsers, usersMock } from 'src/app/utils/user-controller';
 export class HomeComponent implements OnInit {
   public selectedLimit: number = 5;
   public searchInputValue: string = '';
+
+  public sortColumn: string = '';
+  public sortOrder: string = 'asc';
+
   public userDataInfo: UserData[] = [{
     id: 0,
     email: "",
@@ -63,5 +67,27 @@ export class HomeComponent implements OnInit {
         user.username.toLowerCase().includes(this.searchInputValue.toLowerCase())
       );
     }
+  }
+
+  sortUserData(column: keyof UserData) {
+    if (this.sortColumn === column) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortOrder = 'asc';
+      this.sortColumn = column;
+    }
+
+    this.filteredUserDataInfo.sort((a: UserData, b: UserData) => {
+      const valueA = a[column] as string | number | Date;
+      const valueB = b[column] as string | number | Date;
+
+      if (valueA < valueB) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      } else if (valueA > valueB) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
   }
 }
