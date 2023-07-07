@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   deleteUser(userId: number) {
     const userDataWithoutCurrency = this.userDataInfo.filter((user: UserData) => user.id !== userId)
-    this.userDataInfo = userDataWithoutCurrency;
+    this.filteredUserDataInfo = userDataWithoutCurrency;
 
     saveUsers(userDataWithoutCurrency)
   }
