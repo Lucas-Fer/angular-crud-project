@@ -11,7 +11,13 @@ import { getUsers, saveUsers, usersMock } from 'src/app/utils/user-controller';
 })
 export class HomeComponent implements OnInit {
   public selectedLimit: number = 5;
+  public searchInputValue: string = '';
   public userDataInfo: UserData[] = [{
+    id: 0,
+    email: "",
+    username: "",
+  }];
+  public filteredUserDataInfo: UserData[] = [{
     id: 0,
     email: "",
     username: "",
@@ -27,6 +33,8 @@ export class HomeComponent implements OnInit {
     const users = getUsers()
 
     users ? this.userDataInfo = JSON.parse(users) : this.userDataInfo = usersMock;
+
+    this.filteredUserDataInfo = this.userDataInfo;
   }
 
   openAddUserModal() {
@@ -45,5 +53,15 @@ export class HomeComponent implements OnInit {
     this.userDataInfo = userDataWithoutCurrency;
 
     saveUsers(userDataWithoutCurrency)
+  }
+
+  filterUserData() {
+    if (!this.searchInputValue) {
+      this.filteredUserDataInfo = this.userDataInfo;
+    } else {
+      this.filteredUserDataInfo = this.userDataInfo.filter((user: UserData) =>
+        user.username.toLowerCase().includes(this.searchInputValue.toLowerCase())
+      );
+    }
   }
 }
