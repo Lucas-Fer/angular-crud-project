@@ -3,5 +3,5 @@ export interface UserData {
   email: string,
   username: string,
   createdAt?: Date,
-  cpf?: number
+  cpf?: number | string
 }

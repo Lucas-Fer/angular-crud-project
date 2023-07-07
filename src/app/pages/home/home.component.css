@@ -4,6 +4,6 @@
   text-align: center;
 }
 
-th.sortable {
+th.sortable, i {
   cursor: pointer;
 }

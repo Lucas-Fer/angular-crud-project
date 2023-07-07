@@ -7,19 +7,25 @@
 <div class="modal-body">
   <form (ngSubmit)="submitForm()">
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Username *</label>
       <input type="text" class="form-control" id="username" name="username" [disabled]="onlyPreview"
         [(ngModel)]="newUser.username" required>
+      <div *ngIf="!newUser.username" class="text-warning">Username is required.</div>
+
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Email *</label>
       <input type="email" class="form-control" id="email" name="email" [disabled]="onlyPreview"
         [(ngModel)]="newUser.email" required>
+      <div *ngIf="isEmailDuplicated" class="text-danger">Email already exists.</div>
+      <div *ngIf="!emailIsValid" class="text-danger">Invalid email</div>
+      <div *ngIf="!newUser.email" class="text-warning">Email is required.</div>
+
     </div>
     <div class="form-group">
       <label for="cpf">CPF</label>
       <input type="text" class="form-control" id="cpf" name="cpf" [disabled]="onlyPreview" [(ngModel)]="newUser.cpf"
-        required>
+        required (input)="newUser.cpf = formatter(newUser.cpf)">
     </div>
 
     <div class="row mt-4">
