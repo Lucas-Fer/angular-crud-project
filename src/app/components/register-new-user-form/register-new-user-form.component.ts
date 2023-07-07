@@ -34,7 +34,6 @@ export class RegisterNewUserFormComponent {
     }
     if (this.editUser) {
       this.newUser = this.userDataPreview;
-
     }
   }
 

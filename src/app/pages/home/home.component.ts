@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
   public sortColumn: string = '';
   public sortOrder: string = 'asc';
 
+
+  public currentPage: number = 1;
+  public totalPages: number = 0;
+
   public userDataInfo: UserData[] = [{
     id: 0,
     email: "",
@@ -31,6 +35,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getUserInfo();
+    this.calculateTotalPages();
   }
 
   getUserInfo() {
@@ -46,9 +51,11 @@ export class HomeComponent implements OnInit {
     modalRef.componentInstance.currencyUsers = this.userDataInfo;
 
     modalRef.componentInstance.newUserValidated.subscribe((newUser: UserData) => {
-      this.userDataInfo.push(newUser);
+      this.filteredUserDataInfo.push(newUser);
 
-      saveUsers(this.userDataInfo)
+      saveUsers(this.filteredUserDataInfo)
+
+      this.calculateTotalPages();
     });
   }
 
@@ -65,6 +72,8 @@ export class HomeComponent implements OnInit {
     this.filteredUserDataInfo = userDataWithoutCurrency;
 
     saveUsers(userDataWithoutCurrency)
+
+    this.calculateTotalPages();
   }
 
   filterUserData() {
@@ -75,6 +84,8 @@ export class HomeComponent implements OnInit {
         user.username.toLowerCase().includes(this.searchInputValue.toLowerCase())
       );
     }
+
+    this.calculateTotalPages();
   }
 
   sortUserData(column: keyof UserData) {
@@ -98,4 +109,38 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+
+
+
+  calculateTotalPages() {
+    this.totalPages = Math.ceil(this.filteredUserDataInfo.length / this.selectedLimit);
+
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    } else if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
+  }
+
+  goToFirstPage() {
+    this.currentPage = 1;
+  }
+
+  goToLastPage() {
+    this.currentPage = this.totalPages;
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
 }
