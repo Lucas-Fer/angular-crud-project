@@ -2,7 +2,7 @@
 
 Foi criado um projeto em angula com typescript, onde tem uma página inicial para cadastro, edição, listagem, remoção e filtro de usuários.
 
- [Link do projeto em produção (publicado no Netfly):](https://64a857cef65afa15eaefb5d6--teal-madeleine-030a67.netlify.app)
+ [Link do projeto em produção (publicado no Netfly):](https://angular-crud-projects.netlify.app)
 
 <h3>Requisitos</h3>
 
